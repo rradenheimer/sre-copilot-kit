@@ -1,5 +1,5 @@
 """Behavior tests for the skill scripts added in v1.1 (run from repo root: python3 tests/test_scripts.py)."""
-import json, subprocess, sys
+import json, shlex, subprocess, sys
 
 S, F = ".github/skills", "tests/fixtures"
 CASES = [  # (name, command, expected exit, substring expected in stdout or None)
@@ -46,7 +46,7 @@ CASES = [  # (name, command, expected exit, substring expected in stdout or None
 ]
 fails = 0
 for name, cmd, exp, needle in CASES:
-    r = subprocess.run(f"python3 {cmd}", shell=True, capture_output=True, text=True)
+    r = subprocess.run([sys.executable, *shlex.split(cmd)], capture_output=True, text=True)
     ok = r.returncode == exp and (needle is None or needle in r.stdout)
     fails += not ok
     print(("PASS" if ok else f"FAIL (exit {r.returncode})"), name)
