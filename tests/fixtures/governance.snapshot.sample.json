@@ -1,0 +1,7 @@
+{"policies":[
+ {"isEnabled":true,"isBlocking":true,"type":{"id":"fa4e907d-c16b-4a4c-9dfa-4906e5d171dd","displayName":"Minimum number of reviewers"},"settings":{"minimumApproverCount":1,"creatorVoteCounts":true,"scope":[{"refName":"refs/heads/main"}]}},
+ {"isEnabled":true,"isBlocking":false,"type":{"id":"0609b952-1397-4640-95ec-e00a01b2c241","displayName":"Build"},"settings":{"scope":[{"refName":"refs/heads/main"}]}}],
+ "service_connections":[{"name":"prod-sub","type":"azurerm","data":{"scopeLevel":"Subscription"},"authorization":{"scheme":"ServicePrincipal","parameters":{"scope":"/subscriptions/x"}},"serviceEndpointProjectReferences":[{},{}]},
+   {"name":"rg-wif","type":"azurerm","data":{"scopeLevel":"Subscription"},"authorization":{"scheme":"WorkloadIdentityFederation","parameters":{"scope":"/subscriptions/x/resourceGroups/app"}}}],
+ "environments":[{"id":1,"name":"app-prod","checks":[]},{"id":2,"name":"dev","checks":[]}],
+ "agent_queues":[{"name":"Azure Pipelines","pool":{"isHosted":true}},{"name":"onprem","pool":{"isHosted":false}}]}

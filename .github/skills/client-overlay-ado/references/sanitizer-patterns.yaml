@@ -1,0 +1,23 @@
+# ADO and Azure identifiers for sre-telemetry-sanitizer. Extend with client codenames.
+patterns:
+  - name: ado_org_url
+    token: ADO_ORG
+    regex: 'https://dev\.azure\.com/[A-Za-z0-9\-_]+|https://[A-Za-z0-9\-]+\.visualstudio\.com'
+  - name: ado_server_url
+    token: ADO_SERVER
+    regex: 'https?://[A-Za-z0-9\-.]+(:\d+)?/tfs/[A-Za-z0-9\-_]+'
+  - name: azure_guid
+    token: AZ_GUID
+    regex: '\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b'
+  - name: azure_resource_id
+    token: AZ_RESOURCE
+    regex: '/subscriptions/[^\s"'']+'
+  - name: ado_pat_like
+    token: SECRET_REDACTED
+    reversible: false
+    regex: '\b[A-Za-z0-9]{52}\b|\b[A-Za-z0-9]{84}\b'
+  - name: bearer_token
+    token: SECRET_REDACTED
+    reversible: false
+    regex: 'Bearer\s+[A-Za-z0-9\-_=]+\.[A-Za-z0-9\-_=]+\.[A-Za-z0-9\-_=]+'
+client_terms: []   # TODO: project codenames, product names

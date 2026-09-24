@@ -1,0 +1,8 @@
+service: checkout
+slos:
+  - name: checkout-availability
+    description: Checkout requests that succeed
+    target: 99.9
+    window_days: 28
+    good: "AppRequests | where Name startswith 'POST /checkout' and Success == true | count"
+    total: "AppRequests | where Name startswith 'POST /checkout' | count"

@@ -1,0 +1,3 @@
+{"source":"postmortem PM-2026-014","items":[
+ {"title":"Add burn-rate alert for checkout availability SLO","type":"User Story","priority":1,"area_path":"Commerce\\Checkout","tags":["sre-postmortem"],"acceptance_criteria":"Pages within 5 min of 14.4x burn.","parent_id":12345},
+ {"title":"Pin pipeline template repo","type":"Epic","priority":7,"area_path":"Payments"}]}

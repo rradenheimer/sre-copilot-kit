@@ -1,0 +1,22 @@
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Platform/pipeline-templates
+stages:
+  - stage: Deploy
+    dependsOn: Build
+    jobs:
+      - job: deploy
+        steps:
+          - task: AzureWebApp
+            inputs: { appName: x }
+      - deployment: prod
+        environment: app-prod
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: echo hi
+variables:
+  dbPassword: "Sup3rS3cretValue99"

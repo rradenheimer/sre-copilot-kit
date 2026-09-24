@@ -1,0 +1,8 @@
+required_capacity: 640
+target_utilization_pct: 70
+pricing_source: "Example price sheet (fixture)"
+pricing_date: "2026-09-01"
+options:
+  - {name: "Scale out D8s_v5 pay-as-you-go", capacity_per_unit: 8, unit_price_month: 280.0, lead_time_days: 1}
+  - {name: "D8s_v5 1-year reservation", capacity_per_unit: 8, unit_price_month: 176.0, lead_time_days: 1, commitment_months: 12}
+  - {name: "Scale up D16s_v5 3-year reservation", capacity_per_unit: 16, unit_price_month: 225.0, lead_time_days: 2, commitment_months: 36}

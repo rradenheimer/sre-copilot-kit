@@ -1,0 +1,11 @@
+{
+  "inputs": [
+    { "id": "ado_org", "type": "promptString", "description": "Azure DevOps organization name (from dev.azure.com/<org>)" }
+  ],
+  "servers": {
+    "ado": {
+      "type": "http",
+      "url": "https://mcp.dev.azure.com/${input:ado_org}"
+    }
+  }
+}

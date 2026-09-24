@@ -1,0 +1,27 @@
+# Firm baseline patterns. Order matters: secrets first (dropped), then identifiers (tokenized).
+stop_markings:   # any match -> stop processing (exit 3), print nothing from the input
+  - '\bCUI\b'
+  - '\bCONTROLLED UNCLASSIFIED\b'
+  - '\bITAR\b'
+  - '\bEXPORT[- ]CONTROLLED\b'
+  - '\bFOUO\b'
+  - '\b(TOP )?SECRET//'
+  - '\bNOFORN\b'
+patterns:
+  - {name: private_key, token: SECRET_REDACTED, reversible: false, regex: '-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----'}
+  - {name: bearer_jwt, token: SECRET_REDACTED, reversible: false, regex: '\beyJ[A-Za-z0-9_\-]{8,}\.[A-Za-z0-9_\-]{8,}\.[A-Za-z0-9_\-]{8,}\b'}
+  - {name: conn_string_secret, token: SECRET_REDACTED, reversible: false, regex: '(?i)(AccountKey|SharedAccessKey|Password|Pwd)=[^;\s"'']+'}
+  - {name: sas_sig, token: SECRET_REDACTED, reversible: false, regex: '(?i)\bsig=[A-Za-z0-9%+/=]{16,}'}
+  - {name: kv_secret, token: SECRET_REDACTED, reversible: false, regex: '(?i)\b(password|passwd|secret|api[_-]?key|token|client[_-]?secret)\b(\s*[:=]\s*)["'']?[^\s"'',;]{6,}'}
+  - {name: aws_key, token: SECRET_REDACTED, reversible: false, regex: '\bAKIA[0-9A-Z]{16}\b'}
+  - {name: email, token: EMAIL, regex: '\b[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}\b'}
+  - {name: ipv4, token: IP, regex: '\b(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)\b'}
+  - {name: ipv6, token: IP, regex: '\b(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}\b'}
+  - {name: mac, token: MAC, regex: '\b(?:[0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}\b'}
+  - {name: arn, token: AWS_ARN, regex: '\barn:aws[a-z\-]*:[^\s"'']+'}
+  - {name: internal_fqdn, token: HOST, regex: '\b[a-z0-9][a-z0-9\-]*(?:\.[a-z0-9\-]+)*\.(?:internal|corp|local|lan|intra|ad)\b'}
+  - {name: us_ssn, token: GOV_ID, regex: '\b\d{3}-\d{2}-\d{4}\b'}
+  - {name: phone, token: PHONE, regex: '(?<!\d)(?:\+1[ .\-]?)?\(?\d{3}\)?[ .\-]\d{3}[ .\-]\d{4}(?!\d)'}
+entropy:
+  min_length: 32          # standalone strings this long with high entropy are treated as secrets
+  min_bits_per_char: 4.0

@@ -1,0 +1,60 @@
+# Reference pattern: progressive deployment with SLO verification and rollback.
+# Approvals, business-hours and Azure Monitor checks are configured on the ADO environments
+# "app-prod-canary" and "app-prod", not in this file.
+trigger:
+  branches:
+    include: [ main ]
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Platform/pipeline-templates
+      ref: refs/tags/v3.2.0          # pinned
+
+extends:
+  template: governed/base.yml@templates
+  parameters:
+    stages:
+      - stage: Build
+        jobs:
+          - job: build
+            steps:
+              - task: DotNetCoreCLI@2
+                inputs: { command: publish, publishWebProjects: true }
+              - publish: $(Build.ArtifactStagingDirectory)
+                artifact: drop
+
+      - stage: Canary
+        dependsOn: Build
+        condition: succeeded()
+        jobs:
+          - deployment: canary
+            environment: app-prod-canary
+            strategy:
+              canary:
+                increments: [ 5, 25 ]
+                deploy:
+                  steps:
+                    - script: echo "deploy $(strategy.increment)% traffic"
+                on:
+                  failure:
+                    steps:
+                      - script: echo "route traffic back to previous version"
+
+      - stage: Production
+        dependsOn: Canary
+        condition: succeeded()
+        jobs:
+          - deployment: prod
+            environment: app-prod
+            strategy:
+              rolling:
+                maxParallel: 25%
+                deploy:
+                  steps:
+                    - script: echo "deploy to remaining instances"
+                on:
+                  failure:
+                    steps:
+                      - script: echo "redeploy last known good artifact"

@@ -1,0 +1,5 @@
+{"resource_changes":[
+ {"address":"azurerm_mssql_database.main","type":"azurerm_mssql_database","change":{"actions":["delete","create"],"replace_paths":[["collation"]],"before":{},"after":{}}},
+ {"address":"azurerm_role_assignment.ci","type":"azurerm_role_assignment","change":{"actions":["create"],"before":null,"after":{"role_definition_name":"Owner"}}},
+ {"address":"azurerm_storage_account.logs","type":"azurerm_storage_account","change":{"actions":["update"],"before":{"public_network_access_enabled":false},"after":{"public_network_access_enabled":true}}},
+ {"address":"azurerm_app_service_plan.web","type":"azurerm_service_plan","change":{"actions":["no-op"]}}]}

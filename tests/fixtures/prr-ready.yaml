@@ -1,0 +1,13 @@
+service: billing
+domains:
+  observability: {status: met, evidence: "Grafana dashboard billing-overview"}
+  slos_and_alerting: {status: met, evidence: "OpenSLO checkout-availability"}
+  on_call: {status: met, evidence: "Rotation billing-primary"}
+  runbooks: {status: met, evidence: "5 of 5 top alerts"}
+  capacity_and_load: {status: met, evidence: "Load test LT-88"}
+  dependency_failure_modes: {status: n/a}
+  backup_restore: {status: met, evidence: "Restore test 2026-09-01"}
+  dr: {status: met, evidence: "DR test 2026-08-14, RTO 22 min"}
+  security_review: {status: met, evidence: "SEC-1182"}
+  change_and_rollback: {status: met, evidence: "Pipeline rollback stage run 5521"}
+  documentation_and_ownership: {status: met, evidence: "Wiki page"}

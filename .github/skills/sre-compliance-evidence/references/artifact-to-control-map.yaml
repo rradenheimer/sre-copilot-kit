@@ -1,0 +1,83 @@
+# Firm mapping of SRE artifact types to control IDs, with the evidence attributes each needs.
+# Control IDs are from the named framework versions; titles are short paraphrases, not official text.
+# OWNER: compliance lead must verify every ID against the licensed catalogs before client use.
+version: "2026-09 draft"
+frameworks:
+  nist-800-53-r5: "NIST SP 800-53 Rev. 5"
+  soc2: "AICPA Trust Services Criteria (2017, revised points of focus 2022)"
+  iso27001-2022: "ISO/IEC 27001:2022 Annex A"
+  pci-dss-4: "PCI DSS v4.0"
+  hipaa: "HIPAA Security Rule (45 CFR 164)"
+artifacts:
+  incident_record:
+    requires: {attributes: [severity, timeline]}
+    controls:
+      nist-800-53-r5: {IR-4: "Incident handling", IR-5: "Incident monitoring", IR-6: "Incident reporting"}
+      soc2: {CC7.3: "Evaluate security events", CC7.4: "Respond to incidents"}
+      iso27001-2022: {"A.5.25": "Assess and decide on events", "A.5.26": "Respond to incidents"}
+      pci-dss-4: {"12.10": "Respond to suspected and confirmed incidents"}
+      hipaa: {"164.308(a)(6)": "Security incident procedures"}
+  postmortem:
+    requires: {attributes: [action_items_tracked]}
+    controls:
+      nist-800-53-r5: {IR-4: "Incident handling (lessons learned)"}
+      soc2: {CC7.5: "Recover from incidents"}
+      iso27001-2022: {"A.5.27": "Learn from incidents"}
+  runbook_or_ir_plan:
+    requires: {attributes: [owner], max_age_days: 365}
+    controls:
+      nist-800-53-r5: {IR-8: "Incident response plan"}
+      soc2: {CC7.4: "Respond to incidents"}
+      iso27001-2022: {"A.5.24": "Incident management planning"}
+  dr_test_report:
+    requires: {attributes: [tested, results_recorded], max_age_days: 365}
+    controls:
+      nist-800-53-r5: {CP-4: "Contingency plan testing", CP-10: "System recovery and reconstitution"}
+      soc2: {A1.3: "Test recovery plan procedures"}
+      iso27001-2022: {"A.5.30": "ICT readiness for business continuity"}
+      hipaa: {"164.308(a)(7)(ii)(D)": "Contingency plan testing and revision"}
+  backup_log:
+    requires: {attributes: [restore_tested], max_age_days: 90}
+    controls:
+      nist-800-53-r5: {CP-9: "System backup"}
+      soc2: {A1.2: "Backup and recovery infrastructure"}
+      iso27001-2022: {"A.8.13": "Information backup"}
+      hipaa: {"164.308(a)(7)(ii)(A)": "Data backup plan"}
+  change_record:
+    requires: {attributes: [approved, approver_not_author, linked_work_item]}
+    controls:
+      nist-800-53-r5: {CM-3: "Configuration change control", CM-4: "Impact analyses"}
+      soc2: {CC8.1: "Authorize, test and approve changes"}
+      iso27001-2022: {"A.8.32": "Change management"}
+      pci-dss-4: {"6.5.1": "Change management procedures"}
+  monitoring_config:
+    requires: {attributes: [owner, alerts_routed]}
+    controls:
+      nist-800-53-r5: {SI-4: "System monitoring"}
+      soc2: {CC7.2: "Monitor for anomalies"}
+      iso27001-2022: {"A.8.16": "Monitoring activities"}
+  audit_log_stream:
+    requires: {attributes: [retention_days], min_retention_days: 365}
+    controls:
+      nist-800-53-r5: {AU-2: "Event logging", AU-11: "Audit record retention", AU-12: "Audit record generation"}
+      soc2: {CC7.2: "Monitor for anomalies"}
+      iso27001-2022: {"A.8.15": "Logging"}
+      pci-dss-4: {"10.2": "Audit logs capture events", "10.5.1": "Retain audit log history"}
+      hipaa: {"164.312(b)": "Audit controls"}
+  access_review:
+    requires: {attributes: [reviewer], max_age_days: 180}
+    controls:
+      nist-800-53-r5: {AC-2: "Account management", AC-6: "Least privilege"}
+      soc2: {CC6.2: "Register and authorize users", CC6.3: "Modify and remove access"}
+      iso27001-2022: {"A.5.18": "Access rights"}
+      pci-dss-4: {"7.2.4": "Review user accounts and access"}
+  governance_snapshot:
+    requires: {attributes: [high_findings_tracked], max_age_days: 90}
+    controls:
+      nist-800-53-r5: {CM-6: "Configuration settings", AC-6: "Least privilege"}
+      soc2: {CC8.1: "Authorize, test and approve changes", CC6.1: "Logical access controls"}
+      iso27001-2022: {"A.8.9": "Configuration management"}
+  ai_guardrail_log:
+    requires: {attributes: [retention_days], min_retention_days: 365}
+    controls:
+      nist-800-53-r5: {AU-12: "Audit record generation", AC-6: "Least privilege"}

@@ -1,0 +1,6 @@
+2026-09-20T10:01:02Z ERROR payments-api host=db01.corp user=jane.doe@contoso.com src=10.20.30.40
+conn="Server=sql01.corp;Database=pay;User Id=app;Password=Hunter2Hunter2;"
+calling https://dev.azure.com/contosoFin/Payments/_apis with Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.abcdefghijklmnop
+subscription /subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg-pay
+api_key: 9f8e7d6c5b4a39281706f5e4d3c2b1a0
+retry host=db01.corp from 10.20.30.40 project BLUEHERON

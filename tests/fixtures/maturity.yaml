@@ -1,0 +1,12 @@
+client: CLIENTX
+target: 3
+dimensions:
+  incident_management: {score: 2, target: 4, verified: true, evidence: "No IC role"}
+  observability: {score: 3, target: 4, verified: true}
+  slos_and_error_budgets: {score: 1, target: 3, verified: true}
+  on_call_health: {score: 4, verified: false}
+  toil_and_automation: {score: 2, verified: false}
+  change_management: {score: 2, target: 4, verified: true}
+  capacity: {score: 3, verified: true}
+  resilience_and_dr: {score: 1, target: 3, verified: true}
+  reliability_culture: {score: 3, verified: false}

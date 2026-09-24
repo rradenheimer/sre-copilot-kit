@@ -1,0 +1,59 @@
+# Reusable Azure Pipelines template: deterministic SRE reliability gates for pull requests.
+# No AI involved, so it runs in every tenant profile, including Profile C.
+# Use from a client pipeline:
+#   resources:
+#     repositories:
+#       - repository: sre
+#         type: git
+#         name: <Project>/sre-copilot-kit
+#         ref: refs/tags/v1.0.0          # pin a released version
+#   stages:
+#     - template: pipelines/sre-reliability-gates.yml@sre
+#       parameters:
+#         pipelineFiles: ['azure-pipelines.yml']
+#         prodEnvironmentFlags: ['--prod-env app-prod']
+#         terraformPlanJson: ''          # optional path produced by an earlier stage
+parameters:
+  - name: pipelineFiles
+    type: object
+    default: ['azure-pipelines.yml']
+  - name: prodEnvironmentFlags
+    type: object
+    default: []          # e.g. ['--prod-env app-prod', '--prod-env app-prod-canary']
+  - name: requireExtends
+    type: boolean
+    default: false
+  - name: terraformPlanJson
+    type: string
+    default: ''
+  - name: kitPath
+    type: string
+    default: '$(Pipeline.Workspace)/s/sre'   # checkout path of the kit repository
+
+stages:
+  - stage: SreGates
+    displayName: SRE reliability gates
+    jobs:
+      - job: gates
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - checkout: self
+            path: s/app
+          - checkout: sre
+            path: s/sre
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.12'
+          - script: python -m pip install --quiet pyyaml==6.0.2
+            displayName: Install dependencies
+          - ${{ each f in parameters.pipelineFiles }}:
+            - script: >
+                python ${{ parameters.kitPath }}/.github/skills/sre-ado-pipeline-reliability/scripts/pipeline_lint.py
+                $(Pipeline.Workspace)/s/app/${{ f }}
+                ${{ join(' ', parameters.prodEnvironmentFlags) }}
+                ${{ iif(parameters.requireExtends, '--require-extends', '') }}
+              displayName: 'Pipeline reliability lint: ${{ f }}'
+          - ${{ if ne(parameters.terraformPlanJson, '') }}:
+            - script: python ${{ parameters.kitPath }}/.github/skills/sre-change-risk-review/scripts/parse_plan.py ${{ parameters.terraformPlanJson }}
+              displayName: Terraform change risk

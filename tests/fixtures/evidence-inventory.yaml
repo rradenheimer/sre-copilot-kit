@@ -1,0 +1,5 @@
+artifacts:
+  - {type: dr_test_report, id: DR-2026-08, date: "2026-08-14", attributes: {tested: true, results_recorded: true}}
+  - {type: change_record, id: PR-5521, date: "2026-09-10", attributes: {approved: true, approver_not_author: true, linked_work_item: false}}
+  - {type: backup_log, id: BK-0912, date: "2026-05-01", attributes: {restore_tested: true}}
+  - {type: incident_record, id: INC-204, date: "2026-09-02", attributes: {severity: SEV2, timeline: true}}

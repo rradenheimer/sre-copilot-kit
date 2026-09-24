@@ -1,0 +1,28 @@
+# Roadmap items and the prerequisites readiness.py checks. Thresholds are practice defaults; tune per client
+# only with champion agreement. IDs match ROADMAP.md at the repository root.
+items:
+  R1:  {name: "Kit as Azure SRE Agent plugins", horizon: 1}
+  R2:  {name: "Multi-agent incident response", horizon: 1}
+  R3:  {name: "Closed-loop remediation (autonomy ladder)", horizon: 1}
+  R4:  {name: "Continuous reliability agents", horizon: 1}
+  R5:  {name: "Change risk prediction", horizon: 2}
+  R6:  {name: "Anomaly detection and dynamic baselines", horizon: 2}
+  R7:  {name: "Incident similarity search", horizon: 2}
+  R8:  {name: "Alert correlation", horizon: 2}
+  R9:  {name: "Error budget forecasting", horizon: 2}
+  R10: {name: "Service dependency twin", horizon: 3}
+  R11: {name: "SRE for AI agents", horizon: 3}
+  R12: {name: "AI governance evidence", horizon: 3}
+thresholds:
+  r2_min_incidents: 5
+  r3_min_clean_runbooks: 3
+  r5_min_deployments: 200
+  r5_min_change_failures: 10
+  r6_min_telemetry_days: 90
+  r7_min_postmortems: 20
+  r7_min_clean_pct: 80
+  r8_min_alert_events: 500
+  r9_min_sli_days: 28
+  r10_min_tracing_pct: 70
+  r11_min_replay_incidents: 10
+  r12_min_audit_retention_days: 365

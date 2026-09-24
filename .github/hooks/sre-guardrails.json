@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "python3 .github/hooks/scripts/guardrails.py",
+        "powershell": "python .github/hooks/scripts/guardrails.py",
+        "timeoutSec": 10
+      }
+    ],
+    "PreToolUse": [
+      {
+        "type": "command",
+        "bash": "python3 .github/hooks/scripts/guardrails.py",
+        "powershell": "python .github/hooks/scripts/guardrails.py",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}

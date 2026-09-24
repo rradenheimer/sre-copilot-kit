@@ -1,0 +1,17 @@
+{
+  "profile": "C",
+  "write_access": false,
+  "org_url": "https://dev.azure.com/ORGNAME",
+  "project": "PROJECTNAME",
+  "process_template": "Agile",
+  "work_item_types": ["User Story", "Bug", "Task"],
+  "incident": {"type": "Bug", "tag": "incident"},
+  "base_tag": "sre",
+  "area_paths": ["PROJECTNAME"],
+  "required_fields": [],
+  "production_environments": ["app-prod"],
+  "protected_branches": ["main", "release/*"],
+  "required_extends_template": "governed/base.yml@templates",
+  "log_analytics_workspaces": ["law-prod-eastus2"],
+  "reliability_item_sla_days": 30
+}

@@ -1,0 +1,9 @@
+# Never commit client data or sanitizer maps
+.sanitizer/
+out/*
+!out/.gitkeep
+inputs/*
+!inputs/.gitkeep
+*.snapshot.json
+!tests/fixtures/*.snapshot.sample.json
+__pycache__/

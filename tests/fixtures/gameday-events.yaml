@@ -1,0 +1,4 @@
+fault_injected: 2026-09-24T14:00:00Z
+service_restored: 2026-09-24T14:12:30Z
+last_good_data: 2026-09-24T13:57:00Z
+targets: {rto_min: 15, rpo_min: 5}

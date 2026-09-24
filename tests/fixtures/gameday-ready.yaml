@@ -1,0 +1,10 @@
+name: API region failover
+environment: prod
+hypothesis: When East US 2 is unavailable, the API will fail over to Central US within 15 minutes
+steady_state: [{sli: availability, threshold: 99.5}]
+blast_radius: {services: [orders-api], traffic_pct: 10}
+abort_criteria: [{sli: error_rate_pct, threshold: 5}]
+rollback: {steps: ["Re-enable East US 2 in Front Door"], tested: true}
+approvals: [{role: service owner, name: "Orders lead", date: 2026-09-20}, {role: change board, name: "CAB-4411", date: 2026-09-21}]
+comms: {channel: "#orders-gameday"}
+targets: {rto_min: 15, rpo_min: 5}

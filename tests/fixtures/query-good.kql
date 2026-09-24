@@ -1,0 +1,4 @@
+AppRequests
+| where TimeGenerated > ago(1h)
+| where Success == false
+| summarize failed = count() by bin(TimeGenerated, 5m)

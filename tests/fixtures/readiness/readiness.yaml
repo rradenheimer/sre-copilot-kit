@@ -1,0 +1,20 @@
+client: CLIENTX
+files:
+  deployments: tests/fixtures/deployments.json
+  incidents: tests/fixtures/incidents.json
+  telemetry_series: tests/fixtures/capacity-series.json
+  sli_daily: tests/fixtures/sli-daily.json
+  slo_spec: tests/fixtures/slo-spec.yaml
+  alert_events: tests/fixtures/alert-events.json
+  postmortems_dir: tests/fixtures/readiness/postmortems
+  runbooks_dir: tests/fixtures/readiness/runbooks
+facts:
+  hooks_verified: true
+  plugin_packaging: false
+  telemetry_read_access: true
+  gates_pipeline_enabled: true
+  service_topology_available: false
+  tracing_coverage_pct: 40
+  agent_in_production: false
+  control_map_verified: false
+  audit_retention_days: 90

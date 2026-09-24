@@ -1,0 +1,13 @@
+{
+  "_comment": "Use instead of .vscode/mcp.json where the client blocks the hosted endpoint. Keep the server key 'ado' so the agents' 'ado/*' tool lists still match. Verify the package name and domain flags against the current azure-devops-mcp README before use.",
+  "inputs": [
+    { "id": "ado_org", "type": "promptString", "description": "Azure DevOps organization name" }
+  ],
+  "servers": {
+    "ado": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure-devops/mcp", "${input:ado_org}", "-d", "core", "work", "work-items", "repositories", "pipelines", "wiki"]
+    }
+  }
+}

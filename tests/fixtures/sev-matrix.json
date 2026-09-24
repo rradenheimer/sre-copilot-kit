@@ -1,0 +1,4 @@
+{"levels":[
+ {"name":"SEV1","any":{"users_affected_pct":25,"data_loss":true,"revenue_impact":true}},
+ {"name":"SEV2","any":{"users_affected_pct":5,"degraded_critical_journey":true}},
+ {"name":"SEV3","any":{"users_affected_pct":0}}]}

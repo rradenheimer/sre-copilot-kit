@@ -1,0 +1,89 @@
+{
+  "_how_to_use": "Run each prompt in a fresh Copilot agent session with the kit loaded and record which skill loaded (VS Code: Chat debug view / agent logs; CLI: session log). A case passes when expect_skill loads, or when no sre-* skill loads for expect_skill null. Re-run after any description edit.",
+  "cases": [
+    {
+      "prompt": "We're in a SEV2, checkout is timing out. Draft an exec update.",
+      "expect_skill": "sre-incident-command"
+    },
+    {
+      "prompt": "Write up the PIR for last night's payments outage from these notes.",
+      "expect_skill": "sre-postmortem-author"
+    },
+    {
+      "prompt": "What availability target should the orders API have, and how do we alert on it?",
+      "expect_skill": "sre-slo-designer"
+    },
+    {
+      "prompt": "Convert this Splunk search to KQL for Log Analytics.",
+      "expect_skill": "sre-query-translator"
+    },
+    {
+      "prompt": "Turn these steps from Slack into an on-call guide for the queue backlog alert.",
+      "expect_skill": "sre-runbook-author"
+    },
+    {
+      "prompt": "On-call got paged 60 times last week. Which alerts should we kill?",
+      "expect_skill": "sre-alert-hygiene"
+    },
+    {
+      "prompt": "Is this Terraform plan safe to apply to prod?",
+      "expect_skill": "sre-change-risk-review"
+    },
+    {
+      "prompt": "Are we ready to launch the new billing service next week?",
+      "expect_skill": "sre-production-readiness"
+    },
+    {
+      "prompt": "Which SOC 2 controls do our DR test reports satisfy?",
+      "expect_skill": "sre-compliance-evidence"
+    },
+    {
+      "prompt": "When will the AKS node pool run out of memory headroom?",
+      "expect_skill": "sre-capacity-forecast"
+    },
+    {
+      "prompt": "Run a maturity assessment for the retail platform team.",
+      "expect_skill": "sre-maturity-assessment"
+    },
+    {
+      "prompt": "Plan a region failover test for the API tier.",
+      "expect_skill": "sre-gameday-planner"
+    },
+    {
+      "prompt": "Review azure-pipelines.yml for deployment safety.",
+      "expect_skill": "sre-ado-pipeline-reliability"
+    },
+    {
+      "prompt": "Create Boards items for these five postmortem actions.",
+      "expect_skill": "sre-ado-reliability-backlog"
+    },
+    {
+      "prompt": "What's our deployment frequency and change failure rate this quarter?",
+      "expect_skill": "sre-ado-delivery-metrics"
+    },
+    {
+      "prompt": "Audit branch policies and service connections in the Payments project.",
+      "expect_skill": "sre-ado-org-governance"
+    },
+    {
+      "prompt": "Here are the app logs from the incident, summarize the errors.",
+      "expect_skill": "sre-telemetry-sanitizer"
+    },
+    {
+      "prompt": "Is this client ready for AIOps or ML-based change risk scoring?",
+      "expect_skill": "sre-roadmap-readiness"
+    },
+    {
+      "prompt": "When will we run out of error budget on the checkout SLO at the current burn?",
+      "expect_skill": "sre-slo-designer"
+    },
+    {
+      "prompt": "Rename this C# method to use PascalCase.",
+      "expect_skill": null
+    },
+    {
+      "prompt": "Explain the difference between a list and a tuple in Python.",
+      "expect_skill": null
+    }
+  ]
+}
