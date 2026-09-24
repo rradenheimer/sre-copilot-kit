@@ -30,3 +30,67 @@ Status: **built** (active skill or script), **preview** (built, not yet validate
 - **Data quality first.** ML depends on incident attribution and postmortem quality, so Horizon 1 feeds Horizon 2.
 
 See `roadmap/README.md` for how a draft becomes an active skill.
+
+## Repo map
+
+```mermaid
+flowchart TD
+    A[Client Ops / Eng Team] --> B[Inputs and client data]
+    B --> C[Telemetry Sanitizer]
+    C --> D[Agents]
+    D --> E[Skills]
+    D --> F[Hooks]
+    F --> G[Guardrails / approvals / deny rules]
+
+    D --> D1[sre-incident-commander]
+    D --> D2[sre-reviewer]
+    D --> D3[sre-reliability-engineer]
+    D --> D4[sre-backlog-manager]
+    D --> D5[sre-restricted]
+
+    E --> E1[incident / postmortem / runbook / alert hygiene]
+    E --> E2[SLO / query / capacity / game day]
+    E --> E3[change risk / PRR / compliance / governance]
+    E --> E4[maturity / roadmap / DORA / backlog]
+    E --> E5[client-overlay / client-overlay-ado]
+
+    E1 --> S1[Scripts and evidence outputs]
+    E2 --> S2[Scripts and SLO artifacts]
+    E3 --> S3[Review findings and compliance evidence]
+    E4 --> S4[Roadmap / backlog / metrics outputs]
+    E5 --> S5[Profile validation and tenant config]
+
+    F --> H1[preToolUse guardrail checks]
+    H1 --> H2[block destructive commands]
+    H2 --> H3[deny raw input reads]
+    H3 --> H4[require profile-based allow rules]
+    H4 --> H5[ask before ADO work-item writes]
+
+    S1 --> O[Out / audit / artifacts]
+    S2 --> O
+    S3 --> O
+    S4 --> O
+    S5 --> O
+
+    O --> P[Client review / PR / ADO updates]
+    P --> Q[Production use]
+```
+
+## Workflow-by-use-case matrix
+
+| Scenario | Trigger | Primary agents | Primary skills | Guardrail / policy | Output |
+| --- | --- | --- | --- | --- | --- |
+| Incident | outage, degradation, bridge notes, log exports | sre-incident-commander | sre-telemetry-sanitizer, sre-incident-command, sre-postmortem-author | sanitize before analysis; block raw reads; deny unsafe writes | timeline, severity, status update, postmortem draft |
+| Launch / go-live | production readiness or cutover | sre-reviewer, sre-reliability-engineer | sre-production-readiness, sre-ado-pipeline-reliability, sre-change-risk-review, client-overlay | validate profile and approvals; deny destructive commands | readiness result, risk findings, launch recommendation |
+| Audit / compliance | control review, SOC2 / NIST / ISO evidence request | sre-reviewer | sre-compliance-evidence, sre-ado-org-governance, sre-ado-pipeline-reliability | read-only review posture; no unapproved configuration change | control mapping, gap list, evidence inventory |
+| Roadmap / maturity | current-state review, next-capability planning | sre-reviewer, sre-backlog-manager | sre-maturity-assessment, sre-roadmap-readiness, sre-ado-delivery-metrics, sre-ado-reliability-backlog | preview before ADO updates; restrict writes to approved path | maturity score, roadmap readiness, backlog action plan |
+
+## How the repo fits together
+
+- Agents define the operating role.
+- Skills define the domain capability.
+- Hooks enforce safety and policy boundaries.
+- Scripts convert guidance into measurable evidence.
+- Overlay configuration shapes the operating profile for the client.
+
+This is the practical operating model for the kit: safe execution, evidence-first evaluation, and structured progress from triage to readiness and roadmap prioritization.
